@@ -1,0 +1,8 @@
+source_id,title,url,source_type,last_checked,notes
+SRC01,HDFC Mutual Fund official website,https://www.hdfcfund.com/,Official AMC website,2026-10-19,Confirm current pages and service URLs
+SRC02,HDFC ELSS Tax Saver Fund,https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct,Official scheme page,2026-10-19,Verify all scheme figures against latest documents
+SRC03,HDFC Nifty 50 Index Fund,https://www.hdfcfund.com/explore/mutual-funds/hdfc-nifty-50-index-fund/direct,Official scheme page,2026-10-19,Verify all scheme figures against latest documents
+SRC04,HDFC Mid Cap Fund,https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/direct,Official scheme page,2026-10-19,Verify all scheme figures against latest documents
+SRC05,HDFC Flexi Cap Fund,https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular,Official scheme page,2026-10-19,Verify all scheme figures against latest documents
+SRC06,SEBI Investor,https://investor.sebi.gov.in/,Official investor education,2026-10-19,Advice refusal and general education
+SRC07,AMFI India,https://www.amfiindia.com/,Official industry association,2026-10-19,General mutual fund education
