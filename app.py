@@ -82,63 +82,81 @@ def score_fact(question, fact):
             score += 3
     return score
 
+
 def retrieve(question):
-    ranked = sorted(FACTS, key=lambda f: score_fact(question, f), reverse=True)
-    if not ranked or score_fact(question, ranked[0]) < 2:
+    q = question.lower().strip()
+
+    # Handle questions about the schemes covered by the assistant.
+    if any(phrase in q for phrase in [
+        "what schemes are covered",
+        "which schemes are covered",
+        "what schemes does this assistant cover",
+        "which funds are covered",
+        "list the schemes",
+        "schemes covered by this assistant"
+    ]):
+        return {
+            "answer": (
+                "This prototype covers HDFC ELSS Tax Saver Fund, "
+                "HDFC Nifty 50 Index Fund, HDFC Mid Cap Fund, and "
+                "HDFC Flexi Cap Fund. The available facts vary by scheme."
+            ),
+            "source_url": "https://www.hdfcfund.com/explore/mutual-funds",
+            "checked_on": date.today().isoformat()
+        }
+
+    # Find any scheme explicitly named in the question.
+    named_schemes = list(dict.fromkeys(
+        fact["scheme"]
+        for fact in FACTS
+        if fact.get("scheme", "").lower() in q
+    ))
+
+    # If a scheme is named, only search facts for that scheme.
+    candidates = FACTS
+    if named_schemes:
+        candidates = [
+            fact for fact in FACTS
+            if fact.get("scheme", "").lower() in named_schemes
+        ]
+
+    if not candidates:
         return None
-    # Avoid answering about an unrelated scheme when the user named a scheme.
-    named_schemes = [f["scheme"] for f in FACTS if f["scheme"].lower() in question.lower()]
-    if named_schemes and ranked[0]["scheme"] not in named_schemes:
+
+    ranked = sorted(
+        candidates,
+        key=lambda fact: score_fact(question, fact),
+        reverse=True
+    )
+
+    best = ranked[0]
+    best_score = score_fact(question, best)
+
+    if best_score < 2:
         return None
-    return ranked[0]
 
-def format_answer(question):
-    if has_pii(question):
-        return ("Please do not share personal information such as PAN, Aadhaar, account numbers, OTPs, email addresses, or phone numbers. "
-                "This prototype does not need personal information to answer general scheme FAQs.\n\n"
-                "Source: https://investor.sebi.gov.in/\n\n"
-                f"Last updated from sources: {date.today().isoformat()}")
-    if is_advice(question):
-        return ("I can share verified scheme facts, but I can’t recommend whether you should buy, sell, hold, or switch an investment. "
-                "Please consult a qualified financial adviser for personalised advice.\n\n"
-                "Source: https://investor.sebi.gov.in/\n\n"
-                f"Last updated from sources: {date.today().isoformat()}")
-    fact = retrieve(question)
-    if not fact:
-        return ("I couldn’t verify that fact from the current approved source collection. Please check the official HDFC Mutual Fund scheme page or its latest Scheme Information Document.\n\n"
-                "Source: https://www.hdfcfund.com/explore/mutual-funds\n\n"
-                f"Last updated from sources: {date.today().isoformat()}")
-    return (f"{fact['answer']}\n\n"
-            f"Source: {fact['source_url']}\n\n"
-            f"Last updated from sources: {fact['checked_on']}")
+    # Require a recognisable match to the requested topic.
+    topic_keywords = {
+        "exit load": ["exit load", "exit", "redeem", "redemption"],
+        "minimum sip": ["minimum sip", "minimum", "sip"],
+        "lock-in": ["lock-in", "lock in", "lock", "elss"],
+        "riskometer": ["riskometer", "risk level", "risk"],
+        "benchmark": ["benchmark", "benchmarked", "tracks", "tracked"],
+        "expense ratio": ["expense ratio", "expense", "ter", "total expense"]
+    }
 
-st.title("📘 Groww Mutual Fund FAQ Assistant")
-st.caption("A learning prototype for facts-only mutual fund questions.")
+    topic = best.get("topic", "").lower()
+    recognised_topics = [
+        keywords
+        for topic_name, keywords in topic_keywords.items()
+        if topic_name in topic
+    ]
 
-st.info("Facts-only. No investment advice. Do not enter PAN, Aadhaar, account numbers, OTPs, email addresses, or phone numbers.")
+    if recognised_topics and not any(
+        keyword in q
+        for keywords in recognised_topics
+        for keyword in keywords
+    ):
+        return None
 
-st.write("Welcome! Ask about the selected HDFC Mutual Fund schemes, such as exit load, minimum SIP, lock-in, riskometer, benchmark, or expense ratio.")
-
-examples = [
-    "What is the lock-in period for HDFC ELSS Tax Saver Fund?",
-    "What is the exit load for HDFC Nifty 50 Index Fund?",
-    "What is the benchmark for HDFC Mid Cap Fund?"
-]
-st.write("**Try an example:**")
-cols = st.columns(3)
-for i, example in enumerate(examples):
-    if cols[i].button(example, use_container_width=True):
-        st.session_state["question"] = example
-
-question = st.text_input("Your question", key="question", placeholder="e.g. What is the minimum SIP for HDFC Mid Cap Fund?")
-if st.button("Get answer", type="primary", use_container_width=True):
-    if not question.strip():
-        st.warning("Please enter a general factual question.")
-    else:
-        st.markdown("### Answer")
-        st.write(format_answer(question.strip()))
-
-with st.expander("About this prototype"):
-    st.write("This starter version uses a small curated fact collection and retrieval rules. It does not connect to customer accounts or store questions.")
-    st.write("A system prompt is included in the source code to document intended LLM behaviour. To use a hosted LLM, add a provider API key and a reviewed integration; never put secrets in GitHub.")
-    st.write("Facts and source links must be rechecked against the latest official documents before final submission.")
+    return best
