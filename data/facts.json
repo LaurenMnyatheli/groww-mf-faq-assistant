@@ -1,0 +1,202 @@
+[
+  {
+    "source_id": "ELSS_LOCK",
+    "scheme": "HDFC ELSS Tax Saver Fund",
+    "topic": "lock-in",
+    "question": "What is the lock-in period for HDFC ELSS Tax Saver Fund?",
+    "keywords": [
+      "lock-in",
+      "lock in",
+      "elss",
+      "redeem"
+    ],
+    "answer": "HDFC ELSS Tax Saver Fund has a three-year lock-in period for each investment.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "ELSS_SIP",
+    "scheme": "HDFC ELSS Tax Saver Fund",
+    "topic": "minimum SIP",
+    "question": "What is the minimum SIP for HDFC ELSS Tax Saver Fund?",
+    "keywords": [
+      "minimum",
+      "sip",
+      "installment"
+    ],
+    "answer": "The starter note records a minimum SIP of ₹500; verify this against the latest official scheme page before relying on it.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "ELSS_RISK",
+    "scheme": "HDFC ELSS Tax Saver Fund",
+    "topic": "riskometer",
+    "question": "What is the riskometer for HDFC ELSS Tax Saver Fund?",
+    "keywords": [
+      "risk",
+      "riskometer"
+    ],
+    "answer": "The starter note records the riskometer as Very High; verify the latest official scheme documents because labels can change.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "ELSS_BENCH",
+    "scheme": "HDFC ELSS Tax Saver Fund",
+    "topic": "benchmark",
+    "question": "What is the benchmark for HDFC ELSS Tax Saver Fund?",
+    "keywords": [
+      "benchmark",
+      "nifty 500",
+      "tri"
+    ],
+    "answer": "The starter note records NIFTY 500 TRI as the benchmark; verify against the latest official scheme documents.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "ELSS_EXIT",
+    "scheme": "HDFC ELSS Tax Saver Fund",
+    "topic": "exit load",
+    "question": "What is the exit load for HDFC ELSS Tax Saver Fund?",
+    "keywords": [
+      "exit load",
+      "exit",
+      "redeem",
+      "redemption"
+    ],
+    "answer": "The starter note records the exit load as NIL; verify the latest official scheme documents before relying on this information.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-elss-tax-saver-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "NIFTY_EXIT",
+    "scheme": "HDFC Nifty 50 Index Fund",
+    "topic": "exit load",
+    "question": "What is the exit load for HDFC Nifty 50 Index Fund?",
+    "keywords": [
+      "exit load",
+      "exit",
+      "redeem",
+      "redemption"
+    ],
+    "answer": "The starter note records an exit load of 0.25% if redeemed within 3 days; verify the latest official scheme documents before relying on this information.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-nifty-50-index-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "NIFTY_BENCH",
+    "scheme": "HDFC Nifty 50 Index Fund",
+    "topic": "benchmark",
+    "question": "What is the benchmark for HDFC Nifty 50 Index Fund?",
+    "keywords": [
+      "benchmark",
+      "nifty 50",
+      "tri"
+    ],
+    "answer": "The starter note records NIFTY 50 TRI as the benchmark; verify against the latest official scheme documents.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-nifty-50-index-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "NIFTY_SIP",
+    "scheme": "HDFC Nifty 50 Index Fund",
+    "topic": "minimum SIP",
+    "question": "What is the minimum SIP for HDFC Nifty 50 Index Fund?",
+    "keywords": [
+      "minimum",
+      "sip"
+    ],
+    "answer": "The prototype does not contain a verified scheme-specific minimum SIP amount for this fund; check the latest official scheme page.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-nifty-50-index-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "MID_EXIT",
+    "scheme": "HDFC Mid Cap Fund",
+    "topic": "exit load",
+    "question": "What is the exit load for HDFC Mid Cap Fund?",
+    "keywords": [
+      "exit load",
+      "exit",
+      "redeem",
+      "redemption"
+    ],
+    "answer": "The starter note records an exit load of 1% if redeemed within 1 year; verify the latest official scheme documents before relying on this information.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "MID_SIP",
+    "scheme": "HDFC Mid Cap Fund",
+    "topic": "minimum SIP",
+    "question": "What is the minimum SIP for HDFC Mid Cap Fund?",
+    "keywords": [
+      "minimum",
+      "sip"
+    ],
+    "answer": "The starter note records a minimum SIP amount of ₹100; verify the latest official scheme page before relying on this figure.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "MID_BENCH",
+    "scheme": "HDFC Mid Cap Fund",
+    "topic": "benchmark",
+    "question": "What is the benchmark for HDFC Mid Cap Fund?",
+    "keywords": [
+      "benchmark",
+      "nifty midcap 150",
+      "tri"
+    ],
+    "answer": "The starter note records NIFTY Midcap 150 TRI as the benchmark; verify against the latest official scheme documents.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-mid-cap-fund/direct",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "FLEXI_TYPE",
+    "scheme": "HDFC Flexi Cap Fund",
+    "topic": "scheme type",
+    "question": "What type of scheme is HDFC Flexi Cap Fund?",
+    "keywords": [
+      "type",
+      "scheme type",
+      "category",
+      "flexi cap"
+    ],
+    "answer": "HDFC Flexi Cap Fund is categorized as a flexi-cap equity scheme; check the latest official scheme documents for current details.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "FLEXI_EXIT",
+    "scheme": "HDFC Flexi Cap Fund",
+    "topic": "exit load",
+    "question": "What is the exit load for HDFC Flexi Cap Fund?",
+    "keywords": [
+      "exit load",
+      "exit",
+      "redeem",
+      "redemption"
+    ],
+    "answer": "The approved starter collection does not contain a verified exit-load figure for HDFC Flexi Cap Fund. Please check the latest official scheme page or Scheme Information Document.",
+    "source_url": "https://www.hdfcfund.com/explore/mutual-funds/hdfc-flexi-cap-fund/regular",
+    "checked_on": "2026-10-19"
+  },
+  {
+    "source_id": "STATEMENT",
+    "scheme": "HDFC Mutual Fund",
+    "topic": "statement download",
+    "question": "How can I request a mutual fund statement?",
+    "keywords": [
+      "statement",
+      "account statement",
+      "capital gains",
+      "download"
+    ],
+    "answer": "Use HDFC Mutual Fund’s official investor services to find statement options; do not share personal account details with this prototype.",
+    "source_url": "https://www.hdfcfund.com/",
+    "checked_on": "2026-10-19"
+  }
+]
