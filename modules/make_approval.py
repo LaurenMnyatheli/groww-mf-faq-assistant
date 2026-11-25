@@ -152,7 +152,6 @@ def render_make_approval(result: dict, weekly_pulse: str, explainer: dict) -> No
                 "to confirm Google Docs append and Gmail draft creation."
             )
             st.session_state["groww_make_last_approval"] = payload["approval_timestamp"]
-            st.session_state["groww_make_human_approval"] = False
         except requests.RequestException as exc:
             st.error(f"Could not deliver the approved payload to Make: {exc}")
         except Exception as exc:
