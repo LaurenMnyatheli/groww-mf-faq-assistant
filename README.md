@@ -94,32 +94,32 @@ The workflow creates a Gmail draft. It does not automatically send an email.
 Public Customer Reviews (CSV)
              |
              v
-     Review Analysis
+      Review Analysis
              |
              v
-   Theme Classification
+     Theme Classification
              |
              v
-    Weekly Product Pulse
+      Weekly Product Pulse
              |
              v
-    Fee Issue Investigation
+     Fee Issue Investigation
              |
              v
-       RAG Retrieval
+        RAG Retrieval
              |
              v
-    Customer Fee Explanation
+     Customer Fee Explanation
              |
              v
-      Human Approval Gate
+       Human Approval Gate
              |
              v
-       Make Webhook
-          /       \
-         v         v
-   Google Docs   Gmail Draft
-    Append       Create Draft
+        Make Webhook
+           /       \
+          v         v
+    Google Docs   Gmail Draft
+     Append       Create Draft
 ```
 
 ## 4. Technology Stack
@@ -190,11 +190,13 @@ python -m venv venv
 Activate it:
 
 **Mac/Linux**
+
 ```bash
 source venv/bin/activate
 ```
 
 **Windows**
+
 ```bash
 venv\Scripts\activate
 ```
@@ -265,11 +267,16 @@ The current RAG demonstration investigates the distinction between Base Expense 
 
 The explanation is retrieved from a curated official-source corpus and is intended as a draft for review.
 
-Official reference sources:
+The application currently displays the first two retrieved sources in its fee explainer:
 
 - [Groww – BER instead of TER: What changed and why](https://groww.in/updates/groww-now-shows-base-expense-ratio-instead-of-total-expense-ratio)
-- [SEBI – Mutual Fund Master Circular](https://www.sebi.gov.in/)
+- [SEBI – Master Circular for Mutual Funds (March 2026)](https://www.sebi.gov.in/sebi_data/attachdocs/mar-2026/1774024028162.pdf)
+
+**Additional source included in the curated knowledge corpus:**
+
 - [AMFI – Total Expense Ratio disclosures](https://www.amfiindia.com/ter-of-mf-schemes)
+
+The source corpus therefore includes Groww, SEBI and AMFI material, although the current application display shows only the first two sources.
 
 The fee topic is an investigation candidate. The available review sample does not establish that this is a recurring customer misunderstanding.
 
