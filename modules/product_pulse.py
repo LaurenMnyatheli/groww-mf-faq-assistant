@@ -1,35 +1,44 @@
-"""Deterministic weekly product-pulse generator for review intelligence."""
+"""Weekly Product Pulse generator with complete, <=250-word output."""
 from datetime import date
-
+import re
 
 ACTION_LIBRARY = {
     "App experience and customer support": [
-        "Review the highest-volume app reliability and access complaints with Engineering; quantify incidents and affected journeys.",
-        "Audit support contact and escalation journeys, including response-time visibility and unresolved-ticket follow-up.",
-        "Add clearer in-app status messaging for delayed or failed transactions and account checks.",
+        "Engineering: investigate reported reliability, access and transaction-status issues; validate against incident data.",
+        "Support: audit escalation paths, response times and repeat-contact drivers.",
+        "Product: clarify transaction and account-status messages in the app.",
     ],
     "Fees and charges": [
-        "Review fee and charge disclosures at the point where customers place, switch or redeem investments.",
-        "Compare the wording in the app with the latest official scheme and statutory disclosures; escalate inconsistencies.",
-        "Create a support-approved explanation of the specific charge only after the relevant official source has been verified.",
+        "Review fee disclosures at the point customers invest, switch or redeem.",
+        "Validate customer-reported charges against current official scheme documents.",
+        "Prepare support guidance only after the specific fee and source are verified.",
     ],
     "Investment information and performance": [
-        "Audit the accuracy and freshness of displayed investment, NAV and portfolio information.",
-        "Explain the difference between transaction status, units allotted, invested amount and current market value in relevant journeys.",
-        "Add clear timestamps and links to the official source of scheme and transaction information.",
+        "Audit the accuracy and freshness of displayed NAV and portfolio information.",
+        "Explain invested amount, current value, units allotted and transaction status distinctly.",
+        "Validate reported discrepancies against transaction records before classifying defects.",
     ],
     "Withdrawals and redemptions": [
-        "Map the withdrawal and redemption journey, including expected processing times and status updates.",
-        "Review cases where customers report delayed credits or unclear settlement amounts.",
-        "Make expected timelines, dependencies and escalation routes easier to find before customers submit a request.",
+        "Map redemption and withdrawal steps, including expected processing times.",
+        "Investigate reported delays and unclear settlement amounts.",
+        "Make status updates and escalation routes easier to find.",
     ],
 }
 
+def _word_count(text: str) -> int:
+    return len(re.findall(r"\b[\w₹%'.-]+\b", text))
+
+def _short_quote(value: str, max_words: int = 18) -> str:
+    words = value.strip().split()
+    if len(words) <= max_words:
+        return value.strip()
+    return " ".join(words[:max_words]).rstrip(" ,.;:") + "…"
+
 def generate_weekly_pulse(result: dict, pulse_date: str | None = None) -> str:
-    """Create a <=250-word internal note from analyse_reviews() output."""
+    """Generate a concise internal update using only supplied analysis results."""
     pulse_date = pulse_date or date.today().isoformat()
-    themes = result.get("top_three_themes") or result.get("themes") or []
-    quotes = result.get("quotes") or []
+    themes = (result.get("top_three_themes") or result.get("themes") or [])[:3]
+    quotes = (result.get("quotes") or [])[:3]
     total = result.get("total_reviews", 0)
 
     lines = [
@@ -38,64 +47,55 @@ def generate_weekly_pulse(result: dict, pulse_date: str | None = None) -> str:
         "",
         "## Top themes",
     ]
-    if themes:
-        for item in themes[:3]:
-            lines.append(
-                f"- {item['theme']}: {item['count']} reviews ({item['share_pct']}%)."
-            )
-    else:
-        lines.append("- No themes matched the current classifier.")
+    for item in themes:
+        lines.append(f"- {item['theme']}: {item['count']} reviews ({item['share_pct']}%).")
 
     lines += ["", "## Customer voice"]
-    for item in quotes[:3]:
-        quote = item.get("quote", "").strip()
-        if len(quote) > 220:
-            quote = quote[:217].rsplit(" ", 1)[0] + "..."
-        lines.append(
-            f"- “{quote}” ({item.get('source', 'Source not recorded')}, "
-            f"{item.get('review_date') or 'date not recorded'}; "
-            f"{item.get('review_id', 'ID not recorded')})."
-        )
+    for item in quotes:
+        quote = _short_quote(item.get("quote", ""))
+        source = item.get("source") or "Source not recorded"
+        review_date = item.get("review_date") or "date not recorded"
+        review_id = item.get("review_id") or "ID not recorded"
+        lines.append(f"- “{quote}” ({source}, {review_date}; {review_id}).")
 
-    top_theme = themes[0]["theme"] if themes else None
-    if top_theme == "App experience and customer support":
-        observation = (
-            "App experience and support is the largest classified theme. "
-            "Feedback points to reliability, access, transaction-status and "
-            "support-resolution concerns. These are customer-reported issues, "
-            "not independently verified incidents."
-        )
-    elif top_theme == "Fees and charges":
-        observation = (
-            "Fees and charges is the largest classified theme. Review the exact "
-            "charge and disclosure context before treating the comments as evidence "
-            "of an incorrect fee."
-        )
-    elif top_theme == "Investment information and performance":
-        observation = (
-            "Investment information and performance is the largest classified "
-            "theme. Validate reported display or allocation concerns against "
-            "transaction records and official scheme information."
-        )
-    else:
-        observation = (
-            "The leading theme is a signal for further investigation. Review "
-            "individual cases before concluding that the feedback represents a "
-            "confirmed product defect."
-        )
+    top_theme = themes[0]["theme"] if themes else ""
+    observations = {
+        "App experience and customer support": (
+            "App experience and support is the largest classified theme. Reviews report "
+            "reliability, access, transaction-status and support-resolution concerns; "
+            "these are customer reports, not independently verified incidents."
+        ),
+        "Fees and charges": (
+            "Fees and charges is the largest classified theme. Validate the exact charge "
+            "and disclosure context before concluding that a fee is incorrect."
+        ),
+        "Investment information and performance": (
+            "Investment information is the largest classified theme. Validate reported "
+            "display and allocation concerns against transaction records and official data."
+        ),
+        "Withdrawals and redemptions": (
+            "Withdrawal and redemption concerns lead the classified feedback. Validate "
+            "reported delays and settlement questions against operational data."
+        ),
+    }
+    observation = observations.get(
+        top_theme,
+        "The leading theme is an investigation signal; validate individual cases before "
+        "concluding that feedback represents a confirmed product defect."
+    )
     lines += ["", "## Key observation", observation, "", "## Product actions"]
-
     actions = ACTION_LIBRARY.get(top_theme, [
-        "Review the highest-volume customer cases and validate the underlying journey.",
-        "Identify the responsible product and operational owners and quantify customer impact.",
-        "Improve customer-facing status information and support guidance where evidence supports a change.",
+        "Validate the highest-volume customer cases and the underlying journey.",
+        "Assign product and operational owners and quantify customer impact.",
+        "Improve customer-facing information where the evidence supports a change.",
     ])
-    for action in actions[:3]:
-        lines.append(f"- {action}")
+    lines.extend(f"- {action}" for action in actions[:3])
 
     note = "\n".join(lines)
-    # Keep a safety margin under the assignment's 250-word limit.
-    words = note.split()
-    if len(words) > 245:
-        note = " ".join(words[:245])
+    # The content is intentionally concise; fail loudly rather than silently cutting a sentence.
+    if _word_count(note) > 250:
+        raise ValueError(
+            f"Product Pulse is {_word_count(note)} words. Shorten source quotes or sections; "
+            "the generator will not truncate a sentence."
+        )
     return note
