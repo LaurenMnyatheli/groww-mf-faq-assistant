@@ -1,10 +1,11 @@
 """Streamlit UI section for the Groww feedback intelligence prototype."""
-from pathlib import Path
+import json
 
 import pandas as pd
 import streamlit as st
 
 from modules.review_analyser import analyse_reviews, to_markdown_report
+from modules.product_pulse import generate_weekly_pulse
 
 
 def render_feedback_intelligence():
@@ -45,7 +46,7 @@ def render_feedback_intelligence():
     st.markdown("### Three supporting customer excerpts")
     for item in result["quotes"]:
         st.markdown(f"> {item['quote']}")
-        st.caption(f"{item['source']} · {item['review_date']} · {item['review_id']} · Theme: {item['theme']}")
+        st.caption(f"{item['source']} · {item['review_date'] or 'Date not recorded'} · {item['review_id']} · Theme: {item['theme']}")
 
     st.markdown("### Fee-related confusion")
     if result["recurring_fee_issue"]:
@@ -68,6 +69,18 @@ def render_feedback_intelligence():
     else:
         st.write("No fee-related phrases matched.")
 
+    st.markdown("### Weekly Product Pulse")
+    st.caption("Draft generated from the uploaded review analysis. Review before sharing internally.")
+    pulse = generate_weekly_pulse(result)
+    st.markdown(pulse)
+    st.download_button(
+        "Download Weekly Product Pulse",
+        data=pulse,
+        file_name="groww_weekly_product_pulse.md",
+        mime="text/markdown",
+        use_container_width=True,
+    )
+
     report = to_markdown_report(result)
     st.download_button(
         "Download review intelligence report",
@@ -78,7 +91,7 @@ def render_feedback_intelligence():
     )
     st.download_button(
         "Download analysis results (JSON)",
-        data=__import__("json").dumps(result, ensure_ascii=False, indent=2),
+        data=json.dumps(result, ensure_ascii=False, indent=2),
         file_name="groww_review_analysis.json",
         mime="application/json",
         use_container_width=True,
