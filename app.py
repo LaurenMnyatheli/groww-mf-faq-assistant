@@ -1,5 +1,6 @@
 import streamlit as st
 from faq_engine import answer_question
+from feedback_intelligence import render_feedback_intelligence
 
 st.set_page_config(
     page_title="Groww Mutual Fund FAQ Assistant",
@@ -7,7 +8,18 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+# Application navigation
+page = st.sidebar.radio(
+    "Groww AI Workspace",
+    [
+        "Mutual Fund FAQ Assistant",
+        "Customer Feedback Intelligence"
+    ]
+)
 
+if page == "Customer Feedback Intelligence":
+    render_feedback_intelligence()
+    st.stop()
 st.markdown("""
 <style>
 :root { --purple:#6d45e8; --ink:#191547; --muted:#625f7b; --line:#e8e5f2; }
