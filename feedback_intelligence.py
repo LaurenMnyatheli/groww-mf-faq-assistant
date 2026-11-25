@@ -6,6 +6,7 @@ import streamlit as st
 from modules.review_analyser import analyse_reviews, to_markdown_report
 from modules.product_pulse import generate_weekly_pulse
 from modules.fee_rag import build_fee_explainer
+from modules.make_approval import render_make_approval
 
 
 def render_feedback_intelligence():
@@ -113,7 +114,11 @@ def render_feedback_intelligence():
             )
         else:
             st.warning(explainer.get("message", "Insufficient source evidence."))
-
+    render_make_approval(
+        result=result,
+        weekly_pulse=pulse,
+        explainer=st.session_state.get("groww_fee_explainer")
+    )
     st.download_button(
         "Download review intelligence report",
         data=to_markdown_report(result),
