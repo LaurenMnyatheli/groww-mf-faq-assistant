@@ -1,0 +1,29 @@
+[
+  {
+    "chunk_id": "GROWW_BER_TER_01",
+    "title": "Groww: BER instead of TER display",
+    "text": "Groww states that the expense ratio shown as the primary figure on its fund details page is Base Expense Ratio (BER), not Total Expense Ratio (TER). BER reflects the AMC's core management and operating costs. TER is broader and includes BER, brokerage cost, transaction cost incurred for trade execution, and statutory levies including GST. The display change does not mean the actual cost of investing suddenly changed; the additional cost components were already incurred and reflected in the scheme NAV. Groww says investors can view expense ratio information on the fund details page under 'Expense ratio, exit load & tax' and use 'Understand terms' for explanations.",
+    "source_title": "Groww — BER instead of TER: what changed and why",
+    "source_url": "https://groww.in/updates/groww-now-shows-base-expense-ratio-instead-of-total-expense-ratio",
+    "source_type": "Official Groww explanation",
+    "last_checked": "2026-11-25"
+  },
+  {
+    "chunk_id": "SEBI_TER_01",
+    "title": "SEBI: TER composition and disclosure",
+    "text": "SEBI's Master Circular for Mutual Funds dated 20 March 2026 states the TER formula as Base Expense Ratio (BER) plus brokerage cost plus transaction cost incurred for trade execution plus statutory levies including GST. It states that AMCs must disclose scheme-wise and date-wise TER on their websites and on AMFI's website. This source is regulatory material and should be used for the composition and disclosure requirements.",
+    "source_title": "SEBI — Master Circular for Mutual Funds, Chapter 11",
+    "source_url": "https://www.sebi.gov.in/sebi_data/attachdocs/mar-2026/1774024028162.pdf",
+    "source_type": "Official SEBI regulatory source",
+    "last_checked": "2026-11-25"
+  },
+  {
+    "chunk_id": "AMFI_TER_01",
+    "title": "AMFI: where to check scheme TER",
+    "text": "AMFI provides a Total Expense Ratio of Mutual Fund Schemes lookup page. It allows users to filter by financial year, month, fund type, category and mutual fund. The page describes BER, brokerage cost, transaction cost and statutory levies under the SEBI 2026 framework. Use the page to look up the relevant scheme and period; do not invent a scheme-specific TER.",
+    "source_title": "AMFI — Total Expense Ratio of Mutual Fund Schemes",
+    "source_url": "https://www.amfiindia.com/ter-of-mf-schemes",
+    "source_type": "Official AMFI disclosure lookup",
+    "last_checked": "2026-11-25"
+  }
+]
